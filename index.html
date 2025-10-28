@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Canva</title>
+    <link rel="icon" href="https://static.canva.com/static/images/favicon.ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #0a0015 0%, #1a0530 50%, #0f0820 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Page Loader */
+    .page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0015 0%, #1a0530 50%, #0f0820 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader {
+      width: 6em;
+      height: 6em;
+    }
+    .loader-ring {
+      animation: ringA 2s linear infinite;
+    }
+    .loader-ring-a {
+      stroke: #9708F4;
+    }
+    .loader-ring-b {
+      animation-name: ringB;
+      stroke: #5E14E4;
+    }
+    .loader-ring-c {
+      animation-name: ringC;
+      stroke: #9708F4;
+    }
+    .loader-ring-d {
+      animation-name: ringD;
+      stroke: #5E14E4;
+    }
+    @keyframes ringA {
+      from, 4% {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -330;
+      }
+      12% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -335;
+      }
+      32% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -595;
+      }
+      40%, 54% {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -660;
+      }
+      62% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -665;
+      }
+      82% {
+        stroke-dasharray: 60 600;
+        stroke-width: 30;
+        stroke-dashoffset: -925;
+      }
+      90%, to {
+        stroke-dasharray: 0 660;
+        stroke-width: 20;
+        stroke-dashoffset: -990;
+      }
+    }
+    @keyframes ringB {
+      from, 12% {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -110;
+      }
+      20% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -115;
+      }
+      40% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -195;
+      }
+      48%, 62% {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+      }
+      70% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+      }
+      90% {
+        stroke-dasharray: 20 200;
+        stroke-width: 30;
+        stroke-dashoffset: -305;
+      }
+      98%, to {
+        stroke-dasharray: 0 220;
+        stroke-width: 20;
+        stroke-dashoffset: -330;
+      }
+    }
+    @keyframes ringC {
+      from {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: 0;
+      }
+      8% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -5;
+      }
+      28% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -175;
+      }
+      36%, 58% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+      }
+      66% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+      }
+      86% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -395;
+      }
+      94%, to {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -440;
+      }
+    }
+    @keyframes ringD {
+      from, 8% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: 0;
+      }
+      16% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -5;
+      }
+      36% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -175;
+      }
+      44%, 50% {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -220;
+      }
+      58% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -225;
+      }
+      78% {
+        stroke-dasharray: 40 400;
+        stroke-width: 30;
+        stroke-dashoffset: -395;
+      }
+      86%, to {
+        stroke-dasharray: 0 440;
+        stroke-width: 20;
+        stroke-dashoffset: -440;
+      }
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      left: -280px;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background: rgba(18, 8, 32, 0.98);
+      border-right: 2px solid #ff00ff;
+      box-shadow: 0 0 30px #ff00ff88, 0 0 60px #00ffff44;
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      padding-top: 80px;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar-header {
+      padding: 30px 20px;
+      border-bottom: 1px solid #ff00ff44;
+    }
+    .sidebar-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px #ff00ff88;
+      letter-spacing: 2px;
+      word-wrap: break-word;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 20px 0;
+    }
+    .nav-item {
+      display: block;
+      padding: 18px 30px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+    .nav-item:hover {
+      background: rgba(255, 0, 255, 0.1);
+      border-left-color: #ff00ff;
+      color: #fff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    .nav-item.active {
+      background: rgba(255, 0, 255, 0.2);
+      border-left-color: #00ffff;
+      color: #fff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(18, 8, 32, 0.95);
+      border: 2px solid #ff00ff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ff00ff88;
+      cursor: pointer;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+    .menu-toggle:hover {
+      box-shadow: 0 0 30px #ff00ffcc, 0 0 15px #00ffff88;
+      transform: scale(1.05);
+    }
+    .menu-toggle span {
+      width: 28px;
+      height: 3px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .menu-toggle.open span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 20px;
+      padding-top: 90px;
+    }
+    .sidebar.open ~ .main-content {
+      margin-left: 280px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px;
+    }
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px #ff00ff88;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: #00ffff;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px #00ffff88;
+      letter-spacing: 1px;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Home Content */
+    .welcome-section {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 40px;
+      background: rgba(18, 8, 32, 0.93);
+      border: 2px solid #ff00ff;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #ff00ff44;
+    }
+    .welcome-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    .welcome-section p {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    .news-section {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 40px;
+      background: rgba(18, 8, 32, 0.93);
+      border: 2px solid #ff00ff;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #ff00ff44;
+    }
+    .news-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+    .news-section p {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    /* About Content */
+    .about-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+      background: rgba(18, 8, 32, 0.93);
+      border: 2px solid #00ffff;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #00ffff44;
+    }
+    .about-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ffff;
+    }
+    .about-section p {
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #00ffff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      text-shadow: 0 0 15px #00ffff88;
+    }
+
+    /* Error State */
+    .error {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 2px solid #ff0066;
+      border-radius: 15px;
+      text-align: center;
+      color: #ff6699;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Apps Tab Cyberpunk Cards */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px 10px;
+      justify-items: center;
+      background: transparent;
+    }
+    .apps-grid .game-card {
+      background: rgba(18, 8, 32, 0.93);
+      border: 2px solid #ff00ff;
+      box-shadow: 0 0 18px 2px #ff00ff88, 0 0 24px 1px #00ffff44;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.18s cubic-bezier(.4,2,.3,1), box-shadow 0.18s;
+      position: relative;
+      width: 100%;
+      max-width: 200px;
+      min-width: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 280px;
+    }
+    .apps-grid .game-card:hover {
+      transform: scale(1.045) translateY(-6px);
+      box-shadow: 0 0 40px 8px #ff00ffcc, 0 0 80px 2px #00ffff99;
+      z-index: 2;
+    }
+    .apps-grid .game-card-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg,rgba(255,0,255,0.12),rgba(0,255,255,0.10));
+      opacity: 0;
+      transition: opacity 0.18s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .apps-grid .game-card:hover .game-card-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .apps-grid .game-thumbnail {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin: 32px 0 10px 0;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 0 18px #ff00ff55, 0 0 8px #00ffff44;
+      border: 1.5px solid #ff00ff44;
+      display: block;
+    }
+    .apps-grid .game-info {
+      flex: 1 1 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px 8px 10px;
+    }
+    .apps-grid .game-info h3 {
+      color: #fff;
+      font-size: 1.18rem;
+      font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+      font-weight: 800;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 8px #ff00ff, 0 0 2px #fff;
+      text-align: center;
+    }
+    .apps-grid .game-tags {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .apps-grid .game-tag {
+      background: linear-gradient(90deg,#ff00ff 60%,#00ffff 100%);
+      color: #fff;
+      border-radius: 15px;
+      padding: 2px 15px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 8px #ff00ff55;
+      border: none;
+      text-shadow: 0 0 4px #00ffff99;
+      margin-bottom: 2px;
+    }
+    .apps-grid .game-tag[style] {
+      color: #181828;
+      font-weight: 700;
+      border: none;
+      text-shadow: none;
+    }
+    .apps-grid .play-now-btn {
+      width: 90%;
+      margin: 0 auto 18px auto;
+      padding: 13px 0;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(90deg,#ff00ff 0%,#00ffff 100%);
+      color: #fff;
+      font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      box-shadow: 0 0 12px #ff00ff99, 0 0 6px #00ffff44;
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+      outline: none;
+      z-index: 3;
+    }
+    .apps-grid .play-now-btn:hover {
+      background: linear-gradient(90deg,#00ffff 0%,#ff00ff 100%);
+      color: #fff;
+      box-shadow: 0 0 28px #00ffffcc, 0 0 18px #ff00ff99;
+      transform: scale(1.04);
+    }
+    .apps-grid .game-info p {
+      font-size: 0.97rem;
+      color: #e0e0e0;
+      margin: 8px 0 0 0;
+      text-align: center;
+      text-shadow: 0 0 2px #000;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    @media (max-width: 1100px) {
+      .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 18px 6px 14px 6px;
+      }
+      .apps-grid .game-card {
+        max-width: 350px;
+        min-height: 340px;
+      }
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 250px;
+        left: -250px;
+      }
+      .sidebar.open ~ .main-content {
+        margin-left: 0;
+      }
+      .header h1 {
+        font-size: 2rem;
+      }
+      .welcome-section, .about-section {
+        padding: 25px;
+      }
+    }
+    @media (max-width: 700px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 10px 0 8px 0;
+      }
+      .apps-grid .game-card {
+        max-width: 98vw;
+        min-height: 300px;
+      }
+    }
+
+    /* Game Window Overlay */
+    .game-window-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .game-window-overlay.active {
+      display: flex;
+    }
+    .game-window {
+      width: 90%;
+      height: 90%;
+      max-width: 1400px;
+      max-height: 900px;
+      background: rgba(18, 8, 32, 0.98);
+      border: 3px solid #ff00ff;
+      border-radius: 15px;
+      box-shadow: 0 0 50px #ff00ff88, 0 0 100px #00ffff44;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .game-window-header {
+      background: linear-gradient(135deg, #1a0530 0%, #0f0820 100%);
+      border-bottom: 2px solid #ff00ff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .game-window-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+    }
+    .game-window-controls {
+      display: flex;
+      gap: 10px;
+    }
+    .window-btn {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #ff00ff;
+      border-radius: 8px;
+      background: rgba(255, 0, 255, 0.1);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+    }
+    .window-btn:hover {
+      background: rgba(255, 0, 255, 0.3);
+      box-shadow: 0 0 15px #ff00ff88;
+      transform: scale(1.05);
+    }
+    .window-btn.fullscreen-btn {
+      border-color: #00ffff;
+      background: rgba(0, 255, 255, 0.1);
+    }
+    .window-btn.fullscreen-btn:hover {
+      background: rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 15px #00ffff88;
+    }
+    .window-btn.blank-btn {
+      border-color: #9708F4;
+      background: rgba(151, 8, 244, 0.1);
+    }
+    .window-btn.blank-btn:hover {
+      background: rgba(151, 8, 244, 0.3);
+      box-shadow: 0 0 15px #9708F488;
+    }
+    .window-btn.close-btn {
+      border-color: #ff0066;
+      background: rgba(255, 0, 102, 0.1);
+    }
+    .window-btn.close-btn:hover {
+      background: rgba(255, 0, 102, 0.3);
+      box-shadow: 0 0 15px #ff006688;
+    }
+    .game-window-content {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-window-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .game-window {
+        width: 95%;
+        height: 95%;
+      }
+      .game-window-title {
+        font-size: 1rem;
+      }
+      .window-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Save Manager Styles */
+    .save-action-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 18px 30px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      border: 2px solid #ff00ff;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 20px #ff00ff88;
+      text-align: center;
+    }
+    .save-action-btn:hover {
+      background: linear-gradient(90deg, #00ffff, #ff00ff);
+      box-shadow: 0 0 35px #00ffffcc, 0 0 20px #ff00ff99;
+      transform: translateY(-3px);
+    }
+    .save-action-btn span {
+      font-size: 1.4rem;
+      margin-right: 10px;
+    }
+    .save-action-btn.danger-btn {
+      background: linear-gradient(90deg, #ff0066, #ff3399);
+      border-color: #ff0066;
+      box-shadow: 0 0 20px #ff006688;
+    }
+    .save-action-btn.danger-btn:hover {
+      background: linear-gradient(90deg, #ff3399, #ff0066);
+      box-shadow: 0 0 35px #ff0066cc;
+    }
+
+    /* Config Styles */
+    .config-group {
+      margin: 25px 0;
+      padding: 20px;
+      background: rgba(255, 0, 255, 0.05);
+      border: 1px solid #ff00ff44;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .config-group label {
+      color: #00ffff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 150px;
+    }
+    .config-group input[type="color"] {
+      width: 80px;
+      height: 50px;
+      border: 2px solid #ff00ff;
+      border-radius: 8px;
+      cursor: pointer;
+      background: transparent;
+    }
+    .config-group input[type="range"] {
+      flex: 1;
+      min-width: 200px;
+      height: 8px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+    .config-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border: 2px solid #ff00ff;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff00ff88;
+    }
+    .config-group input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border: 2px solid #ff00ff;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff00ff88;
+    }
+    .config-group span {
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 80px;
+    }
+    .config-group input[type="text"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #ff00ff;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      outline: none;
+      transition: all 0.3s;
+    }
+    .config-group input[type="text"]:focus {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #00ffff;
+      box-shadow: 0 0 15px #00ffff88;
+    }
+    .config-actions {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .config-actions .save-action-btn {
+      flex: 1;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <svg class="loader" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle class="loader-ring loader-ring-a" cx="33" cy="33" r="30" fill="none"></circle>
+      <circle class="loader-ring loader-ring-b" cx="33" cy="33" r="30" fill="none"></circle>
+      <circle class="loader-ring loader-ring-c" cx="33" cy="33" r="30" fill="none"></circle>
+      <circle class="loader-ring loader-ring-d" cx="33" cy="33" r="30" fill="none"></circle>
+    </svg>
+  </div>
+
+  <!-- Hamburger Menu Toggle -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2 id="sidebarTitle">CHROMATIC WEB</h2>
+    </div>
+    <div class="sidebar-nav">
+      <a href="#" class="nav-item active" data-tab="home">Home</a>
+      <a href="#" class="nav-item" data-tab="games">Games</a>
+      <a href="#" class="nav-item" data-tab="saves">Saves</a>
+      <a href="#" class="nav-item" data-tab="config">Config</a>
+      <a href="#" class="nav-item" data-tab="news">News</a>
+      <a href="#" class="nav-item" data-tab="about">About</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Home Tab -->
+    <div id="home" class="tab-content active">
+      <div class="header">
+        <h1>CHROMATIC WEB</h1>
+        <p>Welcome to the Digital Spectrum</p>
+      </div>
+      
+      <div class="welcome-section">
+        <h2>Welcome</h2>
+        <p>Life is better when its purple and black (idk what to write in these intros anymore send help)</p>
+      </div>
+    </div>
+
+    <!-- Games Tab -->
+    <div id="games" class="tab-content">
+      <div class="header">
+        <h1>CYBER ARCADE</h1>
+        <p>Enter the Neon Grid</p>
+      </div>
+
+      <div id="gamesContainer">
+        <div class="loading">LOADING GAMES...</div>
+      </div>
+    </div>
+
+    <!-- Saves Tab -->
+    <div id="saves" class="tab-content">
+      <div class="header">
+        <h1>SAVE MANAGER</h1>
+        <p>Backup and Restore Your Progress</p>
+      </div>
+      
+      <div class="about-section">
+        <h2>Export Save Data</h2>
+        <p>Download all your game progress, settings, and cookies to a file. This includes localStorage data and cookies from the current site.</p>
+        <button class="save-action-btn" id="exportBtn">
+          <span>⬇</span> Export Save File
+        </button>
+        
+        <h2 style="margin-top: 40px;">Import Save Data</h2>
+        <p>Load a previously exported save file to restore your game progress. This will overwrite your current data.</p>
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+        <button class="save-action-btn" id="importBtn">
+          <span>⬆</span> Import Save File
+        </button>
+        
+        <h2 style="margin-top: 40px;">Clear All Data</h2>
+        <p style="color: #ff6699;">Warning: This will delete all cookies and localStorage data. This action cannot be undone!</p>
+        <button class="save-action-btn danger-btn" id="clearBtn">
+          <span>🗑</span> Clear All Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Config Tab -->
+    <div id="config" class="tab-content">
+      <div class="header">
+        <h1>CONFIGURATION</h1>
+        <p>Customize Your Experience</p>
+      </div>
+      
+      <div class="about-section">
+        <h2>Color Theme</h2>
+        <p>Choose your primary and secondary colors</p>
+        
+        <div class="config-group">
+          <label for="primaryColor">Primary Color:</label>
+          <input type="color" id="primaryColor" value="#ff00ff">
+          <span id="primaryColorHex">#ff00ff</span>
+        </div>
+        
+        <div class="config-group">
+          <label for="secondaryColor">Secondary Color:</label>
+          <input type="color" id="secondaryColor" value="#00ffff">
+          <span id="secondaryColorHex">#00ffff</span>
+        </div>
+        
+        <h2 style="margin-top: 40px;">Text Size</h2>
+        <p>Adjust the base text size across the site</p>
+        
+        <div class="config-group">
+          <label for="textSize">Text Size:</label>
+          <input type="range" id="textSize" min="80" max="150" value="100" step="5">
+          <span id="textSizeValue">100%</span>
+        </div>
+        
+        <h2 style="margin-top: 40px;">Site Name</h2>
+        <p>Customize the name displayed in the sidebar and headers</p>
+        
+        <div class="config-group">
+          <label for="siteName">Site Name:</label>
+          <input type="text" id="siteName" value="CHROMATIC WEB" maxlength="30" placeholder="Enter site name">
+        </div>
+        
+        <div class="config-actions">
+          <button class="save-action-btn" id="applyConfig">
+            <span>✓</span> Apply Changes
+          </button>
+          <button class="save-action-btn" id="resetConfig">
+            <span>↻</span> Reset to Default
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Tab -->
+    <div id="news" class="tab-content">
+        <div class="news-section">
+        <h2>UPDATE 0.6</h2>
+        <p>Added a save/load system, with loading data from games, and config settings</p>
+      </div>
+        <div class="news-section">
+        <h2>UPDATE 0.4</h2>
+        <p>Added a config section, with full customization for many things</p>
+      </div>
+      <div class="news-section">
+        <h2>UPDATE 0.3</h2>
+        <p>I added some games, still private though</p>
+      </div>
+      <div class="news-section">
+        <h2>UPDATE 0.1</h2>
+        <p>This is the first version of the newer chromatic, so version 2.1 I guess?</p>
+      </div>
+    </div>
+
+    <!-- About Tab -->
+    <div id="about" class="tab-content">
+      <div class="header">
+        <h1>ABOUT</h1>
+        <p>The Story Behind the Spectrum</p>
+      </div>
+      
+      <div class="about-section">
+        <h2>About Chromatic Web</h2>
+        <p>This version of Chromatic might not be the one you remember, but this is because there is only one person working on this redeveloped version of Chromatic, this version is nowhere near finished, and it is recommended that you use a different one until this is finished.</p>
+        <p>And as always, Stay Cyber, Stay Chromatic.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Game Window Overlay -->
+  <div class="game-window-overlay" id="gameWindowOverlay">
+    <div class="game-window">
+      <div class="game-window-header">
+        <div class="game-window-title" id="gameWindowTitle">Game Title</div>
+        <div class="game-window-controls">
+          <button class="window-btn fullscreen-btn" id="fullscreenBtn" title="Fullscreen">⛶</button>
+          <button class="window-btn blank-btn" id="blankBtn" title="Open in about:blank">↗</button>
+          <button class="window-btn close-btn" id="closeBtn" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="game-window-content">
+        <iframe id="gameFrame" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const navItems = document.querySelectorAll('.nav-item');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const gamesContainer = document.getElementById('gamesContainer');
+  const pageLoader = document.getElementById('pageLoader');
+  const gameWindowOverlay = document.getElementById('gameWindowOverlay');
+  const gameFrame = document.getElementById('gameFrame');
+  const gameWindowTitle = document.getElementById('gameWindowTitle');
+  const closeBtn = document.getElementById('closeBtn');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const blankBtn = document.getElementById('blankBtn');
+
+  let currentGameUrl = '';
+  let currentGameName = '';
+
+  // Hide loader when page is fully loaded
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      pageLoader.classList.add('hidden');
+    }, 500);
+  });
+
+  // Toggle sidebar
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    sidebar.classList.toggle('open');
+  });
+
+  // Close sidebar on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+        menuToggle.classList.remove('open');
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+
+  // Tab navigation
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tabName = item.getAttribute('data-tab');
+
+      navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+
+      tabContents.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+
+      if (window.innerWidth <= 768) {
+        menuToggle.classList.remove('open');
+        sidebar.classList.remove('open');
+      }
+    });
+  });
+
+  // Hardcoded game list with tags and descriptions
+  // Automatically load games from GitHub JSON file
+async function loadGames() {
+  const jsonPath = "games.json"; // file your bot updates
+  
+  const url = `games.json`;
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to load game data");
+    const games = await response.json();
+    renderGames(games);
+  } catch (err) {
+    console.error("Error loading games:", err);
+    gamesContainer.innerHTML = `<div class="loading">⚠️ Failed to load games automatically.</div>`;
+  }
+}
+
+// Run it on page load
+loadGames();
+
+
+  // Render games
+  function renderGames(games) {
+    if (!games || games.length === 0) {
+      gamesContainer.innerHTML = '<div class="loading">No games found.</div>';
+      return;
+    }
+
+    const gridHTML = `
+      <div class="apps-grid">
+        ${games.map(game => `
+          <div class="game-card">
+            <div class="game-card-overlay"></div>
+            <img class="game-thumbnail" src="${game.thumbnail}" alt="${game.name}">
+            <div class="game-info">
+              <h3>${game.name}</h3>
+              <div class="game-tags">
+                ${game.tags.map(tag => `<span class="game-tag">${tag}</span>`).join('')}
+              </div>
+              ${game.description ? `<p>${game.description}</p>` : ''}
+            </div>
+            <button class="play-now-btn" data-url="${game.url}">LAUNCH</button>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    gamesContainer.innerHTML = gridHTML;
+
+    // Button listeners
+    document.querySelectorAll('.play-now-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const url = this.getAttribute('data-url');
+        const name = this.closest('.game-card').querySelector('h3').textContent;
+        if (url && url !== '#') {
+          openGameWindow(url, name);
+        } else {
+          alert("Game URL is not set.");
+        }
+      });
+    });
+  }
+
+  // Open game in window
+  function openGameWindow(url, name) {
+    currentGameUrl = url;
+    currentGameName = name;
+    gameWindowTitle.textContent = name;
+    gameFrame.src = url;
+    gameWindowOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close game window
+  function closeGameWindow() {
+    gameWindowOverlay.classList.remove('active');
+    gameFrame.src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Window controls
+  closeBtn.addEventListener('click', closeGameWindow);
+
+  fullscreenBtn.addEventListener('click', () => {
+    const iframe = gameFrame;
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) {
+      iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) {
+      iframe.msRequestFullscreen();
+    }
+  });
+
+  blankBtn.addEventListener('click', () => {
+    const win = window.open('about:blank', '_blank');
+    if (win) {
+      win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${currentGameName}</title>
+          <style>
+            body, html { margin: 0; padding: 0; overflow: hidden; }
+            iframe { width: 100vw; height: 100vh; border: none; }
+          </style>
+        </head>
+        <body>
+          <iframe src="${currentGameUrl}" allowfullscreen></iframe>
+        </body>
+        </html>
+      `);
+      win.document.close();
+    }
+  });
+
+  // Close on overlay click
+  gameWindowOverlay.addEventListener('click', (e) => {
+    if (e.target === gameWindowOverlay) {
+      closeGameWindow();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && gameWindowOverlay.classList.contains('active')) {
+      closeGameWindow();
+    }
+  });
+
+  // Load hardcoded games on page load
+  renderGames(games);
+
+  // Configuration System
+  const defaultConfig = {
+    primaryColor: '#ff00ff',
+    secondaryColor: '#00ffff',
+    textSize: 100,
+    siteName: 'CHROMATIC WEB'
+  };
+
+  let currentConfig = { ...defaultConfig };
+
+  // Load config from localStorage
+  function loadConfig() {
+    const saved = localStorage.getItem('chromaticConfig');
+    if (saved) {
+      try {
+        currentConfig = JSON.parse(saved);
+        applyConfigToPage();
+        updateConfigInputs();
+      } catch (e) {
+        console.error('Error loading config:', e);
+      }
+    }
+  }
+
+  // Save config to localStorage
+  function saveConfig() {
+    localStorage.setItem('chromaticConfig', JSON.stringify(currentConfig));
+  }
+
+  // Apply config to page
+  function applyConfigToPage() {
+    const root = document.documentElement;
+    root.style.setProperty('--primary-color', currentConfig.primaryColor);
+    root.style.setProperty('--secondary-color', currentConfig.secondaryColor);
+    root.style.fontSize = currentConfig.textSize + '%';
+    
+    // Update site name
+    document.getElementById('sidebarTitle').textContent = currentConfig.siteName;
+    document.querySelectorAll('.header h1').forEach(h1 => {
+      if (h1.textContent === 'CHROMATIC WEB' || h1.textContent === currentConfig.siteName || h1.textContent === defaultConfig.siteName) {
+        h1.textContent = currentConfig.siteName;
+      }
+    });
+    
+    // Update CSS variables dynamically
+    const style = document.createElement('style');
+    style.id = 'dynamic-theme';
+    const existing = document.getElementById('dynamic-theme');
+    if (existing) existing.remove();
+    
+    style.textContent = `
+      :root {
+        --primary: ${currentConfig.primaryColor};
+        --secondary: ${currentConfig.secondaryColor};
+      }
+      .sidebar { border-right-color: ${currentConfig.primaryColor}; box-shadow: 0 0 30px ${currentConfig.primaryColor}88, 0 0 60px ${currentConfig.secondaryColor}44; }
+      .sidebar-header h2 { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px ${currentConfig.primaryColor}88; }
+      .nav-item:hover { background: rgba(${hexToRgb(currentConfig.primaryColor)}, 0.1); border-left-color: ${currentConfig.primaryColor}; text-shadow: 0 0 10px ${currentConfig.primaryColor}; }
+      .nav-item.active { background: rgba(${hexToRgb(currentConfig.primaryColor)}, 0.2); border-left-color: ${currentConfig.secondaryColor}; text-shadow: 0 0 10px ${currentConfig.secondaryColor}; }
+      .menu-toggle { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 20px ${currentConfig.primaryColor}88; }
+      .menu-toggle:hover { box-shadow: 0 0 30px ${currentConfig.primaryColor}cc, 0 0 15px ${currentConfig.secondaryColor}88; }
+      .menu-toggle span { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}); }
+      .header h1 { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}, ${currentConfig.primaryColor}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px ${currentConfig.primaryColor}88; }
+      .header p { color: ${currentConfig.secondaryColor}; text-shadow: 0 0 10px ${currentConfig.secondaryColor}88; }
+      .welcome-section, .news-section { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 30px ${currentConfig.primaryColor}44; }
+      .welcome-section h2, .news-section h2 { text-shadow: 0 0 10px ${currentConfig.primaryColor}; }
+      .about-section { border-color: ${currentConfig.secondaryColor}; box-shadow: 0 0 30px ${currentConfig.secondaryColor}44; }
+      .about-section h2 { text-shadow: 0 0 10px ${currentConfig.secondaryColor}; }
+      .loading { color: ${currentConfig.secondaryColor}; text-shadow: 0 0 15px ${currentConfig.secondaryColor}88; }
+      .apps-grid .game-card { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 18px 2px ${currentConfig.primaryColor}88, 0 0 24px 1px ${currentConfig.secondaryColor}44; }
+      .apps-grid .game-card:hover { box-shadow: 0 0 40px 8px ${currentConfig.primaryColor}cc, 0 0 80px 2px ${currentConfig.secondaryColor}99; }
+      .apps-grid .game-card-overlay { background: linear-gradient(135deg,rgba(${hexToRgb(currentConfig.primaryColor)},0.12),rgba(${hexToRgb(currentConfig.secondaryColor)},0.10)); }
+      .apps-grid .game-thumbnail { box-shadow: 0 0 18px ${currentConfig.primaryColor}55, 0 0 8px ${currentConfig.secondaryColor}44; border-color: ${currentConfig.primaryColor}44; }
+      .apps-grid .game-info h3 { text-shadow: 0 0 8px ${currentConfig.primaryColor}, 0 0 2px #fff; }
+      .apps-grid .game-tag { background: linear-gradient(90deg,${currentConfig.primaryColor} 60%,${currentConfig.secondaryColor} 100%); box-shadow: 0 0 8px ${currentConfig.primaryColor}55; text-shadow: 0 0 4px ${currentConfig.secondaryColor}99; }
+      .apps-grid .play-now-btn { background: linear-gradient(90deg,${currentConfig.primaryColor} 0%,${currentConfig.secondaryColor} 100%); box-shadow: 0 0 12px ${currentConfig.primaryColor}99, 0 0 6px ${currentConfig.secondaryColor}44; }
+      .apps-grid .play-now-btn:hover { background: linear-gradient(90deg,${currentConfig.secondaryColor} 0%,${currentConfig.primaryColor} 100%); box-shadow: 0 0 28px ${currentConfig.secondaryColor}cc, 0 0 18px ${currentConfig.primaryColor}99; }
+      .game-window { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 50px ${currentConfig.primaryColor}88, 0 0 100px ${currentConfig.secondaryColor}44; }
+      .game-window-header { border-bottom-color: ${currentConfig.primaryColor}; }
+      .game-window-title { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .window-btn { border-color: ${currentConfig.primaryColor}; background: rgba(${hexToRgb(currentConfig.primaryColor)}, 0.1); }
+      .window-btn:hover { background: rgba(${hexToRgb(currentConfig.primaryColor)}, 0.3); box-shadow: 0 0 15px ${currentConfig.primaryColor}88; }
+      .window-btn.fullscreen-btn { border-color: ${currentConfig.secondaryColor}; background: rgba(${hexToRgb(currentConfig.secondaryColor)}, 0.1); }
+      .window-btn.fullscreen-btn:hover { background: rgba(${hexToRgb(currentConfig.secondaryColor)}, 0.3); box-shadow: 0 0 15px ${currentConfig.secondaryColor}88; }
+      .save-action-btn { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}); border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 20px ${currentConfig.primaryColor}88; }
+      .save-action-btn:hover { background: linear-gradient(90deg, ${currentConfig.secondaryColor}, ${currentConfig.primaryColor}); box-shadow: 0 0 35px ${currentConfig.secondaryColor}cc, 0 0 20px ${currentConfig.primaryColor}99; }
+      .config-group { background: rgba(${hexToRgb(currentConfig.primaryColor)}, 0.05); border-color: ${currentConfig.primaryColor}44; }
+      .config-group label { color: ${currentConfig.secondaryColor}; }
+      .config-group input[type="color"] { border-color: ${currentConfig.primaryColor}; }
+      .config-group input[type="range"] { background: linear-gradient(90deg, ${currentConfig.primaryColor}, ${currentConfig.secondaryColor}); }
+      .config-group input[type="range"]::-webkit-slider-thumb { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 10px ${currentConfig.primaryColor}88; }
+      .config-group input[type="range"]::-moz-range-thumb { border-color: ${currentConfig.primaryColor}; box-shadow: 0 0 10px ${currentConfig.primaryColor}88; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Helper function to convert hex to rgb
+  function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '255, 0, 255';
+  }
+
+  // Update config inputs
+  function updateConfigInputs() {
+    document.getElementById('primaryColor').value = currentConfig.primaryColor;
+    document.getElementById('secondaryColor').value = currentConfig.secondaryColor;
+    document.getElementById('textSize').value = currentConfig.textSize;
+    document.getElementById('siteName').value = currentConfig.siteName;
+    document.getElementById('primaryColorHex').textContent = currentConfig.primaryColor;
+    document.getElementById('secondaryColorHex').textContent = currentConfig.secondaryColor;
+    document.getElementById('textSizeValue').textContent = currentConfig.textSize + '%';
+  }
+
+  // Config event listeners
+  const primaryColorInput = document.getElementById('primaryColor');
+  const secondaryColorInput = document.getElementById('secondaryColor');
+  const textSizeInput = document.getElementById('textSize');
+  const siteNameInput = document.getElementById('siteName');
+  const applyConfigBtn = document.getElementById('applyConfig');
+  const resetConfigBtn = document.getElementById('resetConfig');
+
+  primaryColorInput.addEventListener('input', (e) => {
+    document.getElementById('primaryColorHex').textContent = e.target.value;
+  });
+
+  secondaryColorInput.addEventListener('input', (e) => {
+    document.getElementById('secondaryColorHex').textContent = e.target.value;
+  });
+
+  textSizeInput.addEventListener('input', (e) => {
+    document.getElementById('textSizeValue').textContent = e.target.value + '%';
+  });
+
+  applyConfigBtn.addEventListener('click', () => {
+    currentConfig.primaryColor = primaryColorInput.value;
+    currentConfig.secondaryColor = secondaryColorInput.value;
+    currentConfig.textSize = parseInt(textSizeInput.value);
+    currentConfig.siteName = siteNameInput.value.trim() || 'CHROMATIC WEB';
+    
+    saveConfig();
+    applyConfigToPage();
+    alert('Configuration applied successfully!');
+  });
+
+  resetConfigBtn.addEventListener('click', () => {
+    if (confirm('Reset all settings to default?')) {
+      currentConfig = { ...defaultConfig };
+      saveConfig();
+      applyConfigToPage();
+      updateConfigInputs();
+      alert('Configuration reset to default!');
+    }
+  });
+
+  // Load config on page load
+  loadConfig();
+
+  // Save Manager Functions
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const importFile = document.getElementById('importFile');
+  const clearBtn = document.getElementById('clearBtn');
+
+  // Export save data
+  exportBtn.addEventListener('click', () => {
+    try {
+      const saveData = {
+        timestamp: new Date().toISOString(),
+        localStorage: {},
+        cookies: document.cookie,
+        config: currentConfig
+      };
+
+      // Export all localStorage data
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        saveData.localStorage[key] = localStorage.getItem(key);
+      }
+
+      // Create and download file
+      const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `chromatic-save-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      alert('Save data exported successfully!');
+    } catch (error) {
+      alert('Error exporting save data: ' + error.message);
+    }
+  });
+
+  // Import save data
+  importBtn.addEventListener('click', () => {
+    importFile.click();
+  });
+
+  importFile.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const saveData = JSON.parse(event.target.result);
+
+        if (!saveData.localStorage && !saveData.cookies) {
+          throw new Error('Invalid save file format');
+        }
+
+        // Restore localStorage
+        if (saveData.localStorage) {
+          for (const [key, value] of Object.entries(saveData.localStorage)) {
+            localStorage.setItem(key, value);
+          }
+        }
+
+        // Restore cookies
+        if (saveData.cookies) {
+          // Note: Setting cookies via document.cookie has limitations
+          // Each cookie must be set individually
+          const cookies = saveData.cookies.split('; ');
+          cookies.forEach(cookie => {
+            if (cookie.trim()) {
+              document.cookie = cookie;
+            }
+          });
+        }
+
+        // Restore config
+        if (saveData.config) {
+          currentConfig = saveData.config;
+          localStorage.setItem('chromaticConfig', JSON.stringify(currentConfig));
+          applyConfigToPage();
+          updateConfigInputs();
+        }
+
+        alert('Save data imported successfully! Configuration has been applied.');
+        importFile.value = '';
+      } catch (error) {
+        alert('Error importing save data: ' + error.message);
+        importFile.value = '';
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // Clear all data
+  clearBtn.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear ALL data? This cannot be undone!')) {
+      if (confirm('Really? This will delete all your game progress!')) {
+        try {
+          // Clear localStorage
+          localStorage.clear();
+
+          // Clear cookies
+          const cookies = document.cookie.split('; ');
+          cookies.forEach(cookie => {
+            const [name] = cookie.split('=');
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          });
+
+          alert('All data cleared successfully!');
+        } catch (error) {
+          alert('Error clearing data: ' + error.message);
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
