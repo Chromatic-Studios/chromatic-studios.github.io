@@ -1134,10 +1134,8 @@
   // Hardcoded game list with tags and descriptions
   // Automatically load games from GitHub JSON file
 async function loadGames() {
-  const jsonPath = "games.json"; // file your bot updates
-  
-  const url = `games.json`;
-  
+  const url = `games.json?v=${Date.now()}`; // cache-busting param
+
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to load game data");
